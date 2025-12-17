@@ -12,4 +12,8 @@ public class Bridge {
     public List<String> getBridge() {
         return List.copyOf(bridge);
     }
+
+    public boolean isSameAs(int latestMove, String move) {
+        return bridge.get(latestMove).equals(move);
+    }
 }
