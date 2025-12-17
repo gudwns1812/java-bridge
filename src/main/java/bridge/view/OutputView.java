@@ -30,6 +30,7 @@ public class OutputView {
 
         System.out.println(upperBuilder);
         System.out.println(lowerBuilder);
+        System.out.println();
     }
 
     private static void convertResultToString(List<String> gameResult, boolean success, StringBuilder upperBuilder,
@@ -44,16 +45,22 @@ public class OutputView {
                 delimter = "";
             }
 
-            if (each.equals("U")) {
-                upperBuilder.append(" ").append(printScreenResult(eachSuccess)).append(" ").append(delimter);
-                lowerBuilder.append("   ").append(delimter);
-            }
-
-            upperBuilder.append("   ").append(delimter);
-            lowerBuilder.append(" ").append(printScreenResult(eachSuccess)).append(" ").append(delimter);
+            appendToBuilder(upperBuilder, lowerBuilder, each, eachSuccess, delimter);
         }
         upperBuilder.append("]");
         lowerBuilder.append("]");
+    }
+
+    private static void appendToBuilder(StringBuilder upperBuilder, StringBuilder lowerBuilder, String each,
+                                        boolean eachSuccess, String delimter) {
+        if (each.equals("U")) {
+            upperBuilder.append(" ").append(printScreenResult(eachSuccess)).append(" ").append(delimter);
+            lowerBuilder.append("   ").append(delimter);
+            return;
+        }
+
+        upperBuilder.append("   ").append(delimter);
+        lowerBuilder.append(" ").append(printScreenResult(eachSuccess)).append(" ").append(delimter);
     }
 
     private static String printScreenResult(boolean eachSuccess) {

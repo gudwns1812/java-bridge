@@ -5,7 +5,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class BridgeGameTest {
-    BridgeGame game = new BridgeGame(new FakeBridge(List.of()), 0);
+    BridgeGame game = new BridgeGame(new FakeBridge(List.of()));
     GameResult result = new GameResult(List.of(), true);
 
     @Test

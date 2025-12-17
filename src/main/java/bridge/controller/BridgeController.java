@@ -33,7 +33,6 @@ public class BridgeController {
 
         while (true) {
             move(game, size);
-            OutputView.printMap(result);
 
             if (result.isSuccess()) {
                 break;
@@ -59,6 +58,7 @@ public class BridgeController {
                 String move = InputView.readMoving();
                 result = game.move(move, result);
             });
+            OutputView.printMap(result);
 
             if (!result.isSuccess()) {
                 return;

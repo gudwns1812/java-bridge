@@ -7,15 +7,11 @@ import static bridge.exception.ErrorMessage.NOT_VALID_MOVE;
  */
 public class BridgeGame {
     private final Bridge bridge;
-    private final int latestMove;
+    private Location latestMove;
 
     public BridgeGame(Bridge bridge) {
-        this(bridge, 0);
-    }
-
-    public BridgeGame(Bridge bridge, int latestMove) {
         this.bridge = bridge;
-        this.latestMove = latestMove;
+        latestMove = Location.INIT;
     }
 
     /**
@@ -26,11 +22,13 @@ public class BridgeGame {
     public GameResult move(String move, GameResult result) {
         validateMove(move);
 
-        if (bridge.isSameAs(latestMove, move)) {
-            return result.add(move, true);
+        boolean moveSuccess = false;
+        if (bridge.isSameAs(latestMove.getLocation(), move)) {
+            moveSuccess = true;
         }
 
-        return result.add(move, false);
+        latestMove = latestMove.move();
+        return result.add(move, moveSuccess);
     }
 
     private void validateMove(String move) {
@@ -45,6 +43,6 @@ public class BridgeGame {
      * 재시작을 위해 필요한 메서드의 반환 타입(return type), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
      */
     public BridgeGame retry() {
-        return new BridgeGame(bridge, 0);
+        return new BridgeGame(bridge);
     }
 }
