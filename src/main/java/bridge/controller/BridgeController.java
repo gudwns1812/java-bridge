@@ -25,13 +25,13 @@ public class BridgeController {
     public void run() {
         int tries = 1;
 
+        OutputView.printPrompt(PrintMessage.GAME_BEGIN);
+
+        int size = readSize();
+        List<String> bridge = bridgeMaker.makeBridge(size);
+        BridgeGame game = BridgeFactory.createGame(bridge);
+
         while (true) {
-            OutputView.printPrompt(PrintMessage.GAME_BEGIN);
-
-            int size = readSize();
-            List<String> bridge = bridgeMaker.makeBridge(size);
-            BridgeGame game = BridgeFactory.createGame(bridge);
-
             move(game, size);
             OutputView.printMap(result);
 
@@ -45,6 +45,8 @@ public class BridgeController {
             }
 
             tries++;
+            game = game.retry();
+            result = result.retry();
         }
 
         OutputView.printResult(result, tries);
