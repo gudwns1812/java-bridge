@@ -8,7 +8,7 @@ public class GameResult {
     private final boolean success;
 
     public GameResult(List<String> result, boolean success) {
-        this.result = List.of();
+        this.result = result;
         this.success = success;
     }
 
@@ -29,5 +29,9 @@ public class GameResult {
 
     public boolean isMaxSize(int maxSize) {
         return result.size() == maxSize;
+    }
+
+    public GameResult retry() {
+        return new GameResult(List.of(), true);
     }
 }
